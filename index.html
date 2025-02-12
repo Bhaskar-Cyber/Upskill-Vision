@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upskill Vision - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #7c3aed;
+            background: linear-gradient(to bottom, #0fdac5, #e714e3, #1E90FF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-family: sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .account-type {
+            margin-bottom: 1.5rem;
+        }
+
+        .account-type h2 {
+            color: #7c3aed;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .account-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .account-option {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .account-option.selected {
+            border-color: #7c3aed;
+            background: #f3f0ff;
+        }
+
+        .account-option .circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #7c3aed;
+        }
+
+        .account-option span {
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: #374151;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .forgot-password {
+            color: #7c3aed;
+            text-decoration: none;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .login-button:hover {
+            background: #6d28d9;
+        }
+        .Bhasu{
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Upskill Vision</h1>
+        <p class="subtitle">Get started with your learning journey</p>
+        
+        <div class="login-card">
+            <div class="account-type">
+                <h2>Choose Account Type</h2>
+                <div class="account-options">
+                    <div class="account-option selected" data-type="student">
+                        <div class="circle"></div>
+                        <span>Student</span>
+                    </div>
+                    <div class="account-option" data-type="mentor">
+                        <div class="circle"></div>
+                        <span>Mentor</span>
+                    </div>
+                    <div class="account-option" data-type="administrator">
+                        <div class="circle"></div>
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form id="loginForm" action="Dashboard.html" method="POST" display="__blank">
+                <div class="form-group">
+                    <input type="text" placeholder="Username or email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button class="login-button" onclick="Dashboard.html">
+                    
+                <a href="Dashboard.html" class="Bhasu">LOGIN</a></button>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        
+        // Account type selection
+        const accountOptions = document.querySelectorAll('.account-option');
+        let selectedAccountType = 'student';
+
+        accountOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                accountOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedAccountType = option.dataset.type;
+            });
+        });
+
+        // Form submission
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                accountType: selectedAccountType,
+                username: loginForm.querySelector('input[type="text"]').value,
+                password: loginForm.querySelector('input[type="password"]').value,
+                rememberMe: loginForm.querySelector('#remember').checked
+            };
+            
+/**
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    // Handle successful login
+                    window.location.href = '/dashboard';
+                } else {
+                    // Handle login error
+                    alert('Login failed. Please check your credentials.');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+               // alert('An error occurred during login. Please try again.');
+               
+            }
+               **/
+            
+        }); 
+    </script>
+</body>
+</html>
