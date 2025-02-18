@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upskill Vision - Sign Up</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="auth-card">
+      <div class="header">
+        <h1>Upskill Vision</h1>
+        <p>Create your account to start learning</p>
+      </div>
+      
+      <div class="card-content">
+        <h2>Choose Account Type</h2>
+        
+        <div class="account-types">
+          <div class="account-type selected" data-type="student">
+            <div class="circle-icon"></div>
+            <span>Student</span>
+          </div>
+          <div class="account-type" data-type="mentor">
+            <div class="circle-icon"></div>
+            <span>Mentor</span>
+          </div>
+          <div class="account-type" data-type="administrator">
+            <div class="circle-icon"></div>
+            <span>Administrator</span>
+          </div>
+        </div>
+        
+        <form id="signup-form">
+          <div class="form-group">
+            <input type="text" id="fullname" placeholder="Full Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" placeholder="Email Address" required>
+          </div>
+          <div class="form-group">
+            <input type="password" id="new-password" placeholder="Password" required>
+          </div>
+          <div class="form-group">
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+          </div>
+          <div class="form-terms">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">I agree to the <a href="terms.html">Terms and Conditions</a></label>
+          </div>
+          <button type="submit" class="btn-primary">SIGN UP</button>
+        </form>
+        
+        <p class="redirect-link">Already have an account? <a href="index.html">Login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
